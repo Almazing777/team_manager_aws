@@ -1,0 +1,38 @@
+<h1>Add Player</h1>
+<section>
+  <div class="create">
+    <form (submit)="create()" #formData="ngForm">
+      <div>Player Name:
+        <input type="text" name="name"
+        required
+        minlength="2"
+        [(ngModel)]="player.name"
+        #name="ngModel">
+        <div *ngIf = "(name.touched) && name.errors">
+          <div *ngIf="name.errors.required">
+            You must enter valid name.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Name must be atleast {{ name.errors.minlength.requiredLength}} characters.
+          </div>
+        </div>
+      </div>
+      <div>Preferred Position:
+        <input type="text" name="position"
+        [(ngModel)]="player.position"
+        #position = "ngModel"
+        required
+        minlength="2">
+        <div *ngIf = "(position.touched) && position.errors">
+          <div *ngIf="position.errors.required">
+            You must enter valid position name.
+          </div>
+          <div *ngIf="position.errors.minlength">
+            Position must be atleast {{ position.errors.minlength.requiredLength}} characters.
+          </div>
+        </div>
+      </div>
+      <input type='submit' value="Add" [disabled]="!formData.valid">
+    </form>
+  </div>
+</section>
